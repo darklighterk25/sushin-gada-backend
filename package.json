@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Proyecto para las materias de Lenguajes de Bases de Datos y Metodologías de Desarrollo de Sistemas de la carrera de Ingeniería en Sistemas Computacionales de la Universidad Autónoma de Aguascalientes.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darklighterk25/Sushin-Gada-Backend.git"
+  },
+  "author": "Iryx Clow <https://github.com/Iryx-Clow>, Rafreaky Weyland <https://github.com/darklighterk25>, huguillo2020 <https://github.com/huguillo2020>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darklighterk25/Sushin-Gada-Backend/issues"
+  },
+  "homepage": "https://github.com/darklighterk25/Sushin-Gada-Backend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mysql": "^2.16.0",
+    "shelljs": "^0.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
