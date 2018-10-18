@@ -23,6 +23,6 @@ app.use('/locations', locations);
 app.use('/menu', menu);
 app.use('/account/orders', orders);
 
-app.listen( 8000, () => {
-    console.log('Express Server (Port 8000: \x1b[32m%s\x1b[0m)', 'online' );
+app.listen( PORT, () => {
+    console.log(`Express Server (Port ${PORT}: \x1b[32m%s\x1b[0m)`, 'online' );
 } );
