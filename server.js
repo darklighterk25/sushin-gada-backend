@@ -1,8 +1,13 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const cors = require('cors');
 
 // Configuraciones.
 const PORT = 8000;
+const CORS_OPTS = {
+    origin: 'http://localhost:4200',
+    optionsSuccessStatus: 200
+};
 
 // Rutas.
 const account = require('./routes/account');
@@ -15,6 +20,8 @@ const orders = require('./routes/orders');
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use(cors(CORS_OPTS));
 
 app.use('/', home);
 app.use('/account', account);
