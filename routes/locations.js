@@ -1,8 +1,12 @@
 const express = require('express');
+const database = require('../database');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send('Locations');
+    database.query('SELECT * FROM location', (err, result) => {
+        if (err) throw err;
+        res.status(200).json(result);
+    });
 });
 
 module.exports = router;
