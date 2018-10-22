@@ -1,6 +1,7 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
+const crypto = require('crypto');
 
 router.get('/', (req, res) => {
     res.status(200).json(
@@ -22,7 +23,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    database.query(`SELECT id_user, account_type FROM user where email = '${req.headers['email']}' and password = '${req.headers['password']}'`, (err, result) => {
+    const hash = crypto.createHash('sha256')
+    .update(req.headers['password'])
+    .digest('hex');
+    database.query(`SELECT id_user, account_type FROM user where email = '${req.headers['email']}' and password = '${hash}'`, (err, result) => {
         if (err) throw err;
         if (result.length === 1) {
             var employee;
@@ -42,16 +46,16 @@ router.post('/login', (req, res) => {
             res.status(200).json(
                 {
                     "loggedIn": "false",
-                    "employee": "-1",
+                    "employee": "false",
                     "id_user": "-1"
                 }
             );
         } else {
             res.status(200).json(
                 {
-                    "loggedIn": "null",
-                    "employee": "-1",
-                    "id_user": "-1"
+                    "loggedIn": "false",
+                    "employee": "false",
+                    "id_user": "-2"
                 }
             );
         }
