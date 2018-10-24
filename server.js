@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
 
 // Configuraciones.
 const PORT = 8000;
@@ -22,6 +23,8 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors(CORS_OPTS));
+
+app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
 
 app.use('/', home);
 app.use('/account', account);
