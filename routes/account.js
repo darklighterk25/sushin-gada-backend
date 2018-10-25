@@ -24,9 +24,9 @@ router.get('/', (req, res) => {
 
 router.post('/login', (req, res) => {
     const hash = crypto.createHash('sha256')
-    .update(req.headers['password'])
-    .digest('hex');
-    database.query(`SELECT id_user, account_type FROM user where email = '${req.headers['email']}' and password = '${hash}'`, (err, result) => {
+        .update(req.body['password'])
+        .digest('hex');
+    database.query(`SELECT id_user, account_type FROM user where email = '${req.body['email']}' and password = '${hash}'`, (err, result) => {
         if (err) throw err;
         if (result.length === 1) {
             var employee;
@@ -37,7 +37,7 @@ router.post('/login', (req, res) => {
             }
             res.status(200).json(
                 {
-                    "loggedIn": "true",
+                    "logged_in": "true",
                     "employee": `${employee}`,
                     "id_user": `${result[0].id_user}`
                 }
@@ -45,7 +45,7 @@ router.post('/login', (req, res) => {
         } else if (result.length === 0) {
             res.status(200).json(
                 {
-                    "loggedIn": "false",
+                    "logged_in": "false",
                     "employee": "false",
                     "id_user": "-1"
                 }
@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
         } else {
             res.status(200).json(
                 {
-                    "loggedIn": "false",
+                    "logged_in": "false",
                     "employee": "false",
                     "id_user": "-2"
                 }

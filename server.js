@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
@@ -7,6 +6,7 @@ const session = require('express-session');
 const PORT = 8000;
 const CORS_OPTS = {
     origin: 'http://localhost:4200',
+    credentials: true,
     optionsSuccessStatus: 200
 };
 
@@ -20,7 +20,7 @@ const orders = require('./routes/orders');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(cors(CORS_OPTS));
 
