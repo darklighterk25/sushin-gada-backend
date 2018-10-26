@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 
 // Configuraciones.
 const PORT = 8000;
@@ -24,7 +24,11 @@ app.use(express.json());
 
 app.use(cors(CORS_OPTS));
 
-app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key_1', 'key_2'],
+    maxAge: 24 * 60 * 60 * 1000
+}));
 
 app.use('/', home);
 app.use('/account', account);
