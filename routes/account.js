@@ -4,7 +4,7 @@ const router = express.Router();
 const crypto = require('crypto');
 
 router.get('/', (req, res) => {
-    database.query(`select name, last_name1 as lastName1, last_name2 as lastName2, birth_date as birthDate, gender, email, json_object("street", street, "number", number, "interiorNumber", interior_number, "neighborhood", neighborhood, "zipCode", zip_code, "phone", phone) as "address" from user join address on id_shipping_address = id_address and id_user = ${req.session.id_user}`, (err, result) => {
+    database.query(`select name, lastName1, lastName2, birthDate, gender, email, address from accounts_view where id_user = ${req.session.id_user}`, (err, result) => {
         result = result.map(row => (row.address = JSON.parse(row.address), row));
         res.status(200).json(result[0]);
     });
@@ -25,14 +25,14 @@ router.post('/login', (req, res) => {
             });
         }
         else if (result.length === 0) {
-            res.status(200).json({
+            res.status(404).json({
                 "logged_in": "false",
                 "employee": "false",
                 "id_user": "-1"
             });
         }
         else {
-            res.status(200).json({
+            res.status(401).json({
                 "logged_in": "false",
                 "employee": "false",
                 "id_user": "-2"
