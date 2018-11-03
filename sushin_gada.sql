@@ -240,13 +240,16 @@ CREATE TABLE `purchase` (
   `taxes` varchar(45) NOT NULL,
   `total` varchar(45) NOT NULL,
   `track` tinyint(4) DEFAULT NULL,
+  `id_billing_address` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_purchase`),
   KEY `id_user` (`id_user`),
   KEY `id_location` (`id_location`),
   KEY `id_discount` (`id_discount`),
+  KEY `id_billing_address` (`id_billing_address`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
   CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
-  CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`id_discount`) REFERENCES `discount` (`id_discount`)
+  CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`id_discount`) REFERENCES `discount` (`id_discount`),
+  CONSTRAINT `purchase_ibfk_4` FOREIGN KEY (`id_billing_address`) REFERENCES `address` (`id_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -318,7 +321,6 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `id_shipping_address` int(11) NOT NULL,
-  `id_billing_address` int(11) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `last_name1` varchar(45) DEFAULT NULL,
   `last_name2` varchar(45) DEFAULT NULL,
@@ -327,11 +329,10 @@ CREATE TABLE `user` (
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(64) DEFAULT NULL,
   `account_type` tinyint(4) DEFAULT NULL,
+  `active` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_shipping_address` (`id_shipping_address`),
-  KEY `id_billing_address` (`id_billing_address`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_shipping_address`) REFERENCES `address` (`id_address`),
-  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_billing_address`) REFERENCES `address` (`id_address`)
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_shipping_address`) REFERENCES `address` (`id_address`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,7 +342,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,4,4,'Marco','Rubio','Cortéz','1965-08-14',0,'marco.rubio@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(2,5,6,'Sarah','Connor',NULL,'1956-09-26',1,'t2isdabest@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(3,1,1,'Miguel','Hidalgo','Costilla','1753-05-08',0,'padre-de-la-patria@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0),(4,7,7,'Andrés Manuel','López','Obrador','1953-11-13',0,'amlove@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(5,2,2,'Obi','Wan','Kenobi','1977-05-25',0,'otfan@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0),(6,8,9,'Bond','James','Bond','1962-10-05',0,'dr.no@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(7,10,10,'Lara','Croft',NULL,'1996-10-25',1,'tomb-raider@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(8,3,3,'Sor Juana','Inés','De La Cruz','1648-11-12',1,'10ma-musa@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0),(9,1,1,'Gordon','Freeman',NULL,'1998-11-19',0,'half-life@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(10,11,11,'Neta','Lee','Hershlag','1981-06-09',1,'natalie-portman@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(11,12,13,'Mario Fortino Alfonso','Moreno','Reyes','1911-08-12',1,'cantinflas@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1),(12,14,14,'Enrique','Peña','Nieto','1966-07-20',1,'infraestuctochor@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1);
+INSERT INTO `user` VALUES (1,4,'Marco','Rubio','Cortéz','1965-08-14',0,'marco.rubio@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(2,5,'Sarah','Connor',NULL,'1956-09-26',1,'t2isdabest@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(3,1,'Miguel','Hidalgo','Costilla','1753-05-08',0,'padre-de-la-patria@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0,1),(4,7,'Andrés Manuel','López','Obrador','1953-11-13',0,'amlove@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(5,2,'Obi','Wan','Kenobi','1977-05-25',0,'otfan@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0,1),(6,8,'Bond','James','Bond','1962-10-05',0,'dr.no@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(7,10,'Lara','Croft',NULL,'1996-10-25',1,'tomb-raider@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(8,3,'Sor Juana','Inés','De La Cruz','1648-11-12',1,'10ma-musa@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',0,1),(9,1,'Gordon','Freeman',NULL,'1998-11-19',0,'half-life@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(10,11,'Neta','Lee','Hershlag','1981-06-09',1,'natalie-portman@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(11,12,'Mario Fortino Alfonso','Moreno','Reyes','1911-08-12',1,'cantinflas@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1),(12,14,'Enrique','Peña','Nieto','1966-07-20',1,'infraestuctochor@correo.com','3e6dc62f220c57f4e44e3dd541c175b3a4fd22986bafa16d47ce3d4c2b224ac8',1,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-30 17:34:55
+-- Dump completed on 2018-11-03 15:35:19
