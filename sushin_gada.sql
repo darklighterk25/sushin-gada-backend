@@ -189,7 +189,8 @@ SET character_set_client = utf8;
 /*!50001 CREATE VIEW `locations_view` AS SELECT 
  1 AS `name`,
  1 AS `address`,
- 1 AS `coordinates`*/;
+ 1 AS `coordinates`,
+ 1 AS `schedule`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -376,8 +377,8 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `locations_view` AS select `location`.`name` AS `name`,json_object('street',`address`.`street`,'number',`address`.`number`,'interiorNumber',`address`.`interior_number`,'neighborhood',`address`.`neighborhood`,'zipCode',`address`.`zip_code`,'phone',`address`.`phone`) AS `address`,json_object('latitude',`location`.`latitude`,'longitude',`location`.`longitude`) AS `coordinates` from (`location` join `address` on((`location`.`id_address` = `address`.`id_address`))) */;
+/*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `locations_view` AS select `location`.`name` AS `name`,json_object('street',`address`.`street`,'number',`address`.`number`,'interiorNumber',`address`.`interior_number`,'neighborhood',`address`.`neighborhood`,'zipCode',`address`.`zip_code`,'phone',`address`.`phone`) AS `address`,json_object('latitude',`location`.`latitude`,'longitude',`location`.`longitude`) AS `coordinates`,json_arrayagg(json_object('day',`location_schedule`.`day`,'start',`schedule`.`start`,'end',`schedule`.`end`)) AS `schedule` from (((`location` join `location_schedule` on((`location`.`id_location` = `location_schedule`.`id_location`))) join `schedule` on((`location_schedule`.`id_schedule` = `schedule`.`id_schedule`))) join `address` on((`location`.`id_address` = `address`.`id_address`))) group by `location`.`id_location` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -391,4 +392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-03 15:35:19
+-- Dump completed on 2018-11-03 17:00:21

@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
         if (err) throw err;
         result = result.map(row => (row.address = JSON.parse(row.address), row));
         result = result.map(row => (row.coordinates = JSON.parse(row.coordinates), row));
+        result = result.map(row => (row.schedule = JSON.parse(row.schedule), row));
         res.status(200).json(result);
     });
 });
