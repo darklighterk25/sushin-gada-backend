@@ -16,7 +16,7 @@ router.delete('/delete', (req, res) => {
             if(err) throw err;
             req.session = null;
             res.status(200).json({
-                "status" : "200"
+                "status" : 200
             });
         });
     }
@@ -38,17 +38,18 @@ router.post('/login', (req, res) => {
             res.status(200).json({
                 "logged_in": "true",
                 "employee": `${employee}`,
-                "id_user": `${result[0].id_user}`
+                "id_user": `${result[0].id_user}`,
+                "status": 200
             });
         }
         else if (result.length === 0) {
             res.status(401).json({
-                "status": "401"
+                "status": 401
             });
         }
         else {
             res.status(409).json({
-                "status": "409"
+                "status": 409
             });
         }
     });
@@ -57,7 +58,7 @@ router.post('/login', (req, res) => {
 router.get('/logout', (req, res) => {
     req.session = null;
     res.status(200).json({
-        "status": "200"
+        "status": 200
     });
 });
 
@@ -66,12 +67,13 @@ router.get('/logged', (req, res) => {
         res.status(200).json({
             "logged_in": "true",
             "employee": `${req.session.employee}`,
-            "id_user": `${req.session.id_user}`
+            "id_user": `${req.session.id_user}`,
+            "status": 200
         });
     }    
     else {
         res.status(403).json({
-            "status": "403"
+            "status": 403
         });
     }
 });
@@ -95,7 +97,7 @@ router.put('/signup', (req, res) => {
                     )`, (err, result) => {
         if (err) throw err;
         res.status(200).json({
-            "status": "200"
+            "status": 200
         });
     });
 });
@@ -119,7 +121,7 @@ router.put('/edit', (req, res) => {
                     )`, (err, result) => {
         if (err) throw err;
         res.status(200).json({
-            "status": "200"
+            "status": 200
         });
     });
 });
