@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sushin_gada
 -- ------------------------------------------------------
--- Server version	5.7.23-0ubuntu0.18.04.1
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8mb4 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Temporary table structure for view `accounts_view`
+-- Temporary view structure for view `accounts_view`
 --
 
 DROP TABLE IF EXISTS `accounts_view`;
 /*!50001 DROP VIEW IF EXISTS `accounts_view`*/;
 SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `accounts_view` AS SELECT 
  1 AS `id_user`,
  1 AS `name`,
@@ -40,7 +40,7 @@ SET character_set_client = @saved_cs_client;
 
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `address` (
   `id_address` int(11) NOT NULL AUTO_INCREMENT,
   `street` varchar(50) NOT NULL,
@@ -64,12 +64,32 @@ INSERT INTO `address` VALUES (1,'Avenida Luis Donaldo Colosio','119',NULL,'Jardi
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `cart_view`
+--
+
+DROP TABLE IF EXISTS `cart_view`;
+/*!50001 DROP VIEW IF EXISTS `cart_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `cart_view` AS SELECT 
+ 1 AS `id_user`,
+ 1 AS `id`,
+ 1 AS `closed`,
+ 1 AS `delivered`,
+ 1 AS `date`,
+ 1 AS `discount`,
+ 1 AS `taxes`,
+ 1 AS `total`,
+ 1 AS `items`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `discount`
 --
 
 DROP TABLE IF EXISTS `discount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `discount` (
   `id_discount` int(11) NOT NULL AUTO_INCREMENT,
   `code` char(6) NOT NULL,
@@ -77,7 +97,7 @@ CREATE TABLE `discount` (
   `start` datetime NOT NULL,
   `end` datetime NOT NULL,
   PRIMARY KEY (`id_discount`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +106,7 @@ CREATE TABLE `discount` (
 
 LOCK TABLES `discount` WRITE;
 /*!40000 ALTER TABLE `discount` DISABLE KEYS */;
-INSERT INTO `discount` VALUES (1,'GP3RY5',0.15,'2018-12-12 00:00:00','2019-01-06 23:59:59'),(2,'R4F4BD',0.10,'2019-07-25 00:00:00','2019-07-25 23:59:59'),(3,'L4L0BD',0.15,'2019-03-26 00:00:00','2019-03-26 23:59:59'),(4,'V1D4BD',0.05,'2019-05-17 00:00:00','2019-05-17 23:59:59'),(5,'MUTHUR',0.30,'2019-05-10 00:00:00','2019-05-10 23:59:59'),(6,'MAY4TH',0.25,'2019-05-04 00:00:00','2019-05-04 23:59:59'),(7,'LEIFER',0.50,'2019-10-09 00:00:00','2019-10-09 23:59:59'),(8,'VIVAMX',0.15,'2019-09-15 00:00:00','2019-09-16 23:59:59'),(9,'REVMEX',0.15,'2018-11-20 00:00:00','2018-11-20 23:59:59'),(10,'NAVIDA',0.35,'2018-12-24 00:00:00','2018-12-25 23:59:59'),(11,'2019NY',0.35,'2019-01-01 00:00:00','2019-01-01 23:59:59'),(12,'DININO',0.50,'2019-04-30 00:00:00','2019-04-30 23:59:59'),(13,'DPADRE',0.50,'2019-06-16 00:00:00','2019-06-16 23:59:59'),(14,'314DAY',0.31,'2019-03-14 00:00:00','2019-03-14 23:59:59'),(15,'SQUIDW',0.15,'2019-02-15 00:00:00','2019-02-15 23:59:59'),(16,'<3-DAY',0.40,'2019-02-14 00:00:00','2019-02-14 23:59:59');
+INSERT INTO `discount` VALUES (0,'N/A',0.00,'1000-01-01 00:00:00','9999-12-31 23:59:59'),(1,'GP3RY5',0.15,'2018-12-12 00:00:00','2019-01-06 23:59:59'),(2,'R4F4BD',0.10,'2019-07-25 00:00:00','2019-07-25 23:59:59'),(3,'L4L0BD',0.15,'2019-03-26 00:00:00','2019-03-26 23:59:59'),(4,'V1D4BD',0.05,'2019-05-17 00:00:00','2019-05-17 23:59:59'),(5,'MUTHUR',0.30,'2019-05-10 00:00:00','2019-05-10 23:59:59'),(6,'MAY4TH',0.25,'2019-05-04 00:00:00','2019-05-04 23:59:59'),(7,'LEIFER',0.50,'2019-10-09 00:00:00','2019-10-09 23:59:59'),(8,'VIVAMX',0.15,'2019-09-15 00:00:00','2019-09-16 23:59:59'),(9,'REVMEX',0.15,'2018-11-20 00:00:00','2018-11-20 23:59:59'),(10,'NAVIDA',0.35,'2018-12-24 00:00:00','2018-12-25 23:59:59'),(11,'2019NY',0.35,'2019-01-01 00:00:00','2019-01-01 23:59:59'),(12,'DININO',0.50,'2019-04-30 00:00:00','2019-04-30 23:59:59'),(13,'DPADRE',0.50,'2019-06-16 00:00:00','2019-06-16 23:59:59'),(14,'314DAY',0.31,'2019-03-14 00:00:00','2019-03-14 23:59:59'),(15,'SQUIDW',0.15,'2019-02-15 00:00:00','2019-02-15 23:59:59'),(16,'<3-DAY',0.40,'2019-02-14 00:00:00','2019-02-14 23:59:59');
 /*!40000 ALTER TABLE `discount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,20 +116,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `items` (
   `id_items` int(11) NOT NULL AUTO_INCREMENT,
   `id_purchase` int(11) NOT NULL,
   `id_item` tinyint(4) NOT NULL,
   `quantity` tinyint(4) NOT NULL,
-  `subtotal` tinyint(4) NOT NULL,
+  `subtotal` decimal(5,2) DEFAULT NULL,
   `price` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id_items`),
   KEY `id_purchase` (`id_purchase`),
   KEY `id_item` (`id_item`),
-  CONSTRAINT `items_ibfk_1` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`),
-  CONSTRAINT `items_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `menu` (`id_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `items_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `menu` (`id_item`),
+  CONSTRAINT `items_ibfk_3` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,8 +138,32 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
+INSERT INTO `items` VALUES (1,1,2,2,200.00,100.00),(2,1,4,1,130.00,130.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `purchase_trigger` AFTER INSERT ON `items` FOR EACH ROW begin
+  declare aux_purchase int;
+  declare aux_total varchar(45);
+  declare aux_taxes varchar(45);
+  set aux_purchase = new.id_purchase;
+  select sum(subtotal) from items where id_purchase = aux_purchase into aux_total;
+  set aux_taxes = aux_total * 0.16;
+  update purchase set total = aux_total, taxes = aux_taxes where id_purchase = aux_purchase;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `location`
@@ -127,7 +171,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `location` (
   `id_location` int(11) NOT NULL AUTO_INCREMENT,
   `id_address` int(11) NOT NULL,
@@ -156,7 +200,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `location_schedule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `location_schedule` (
   `id_location` int(11) DEFAULT NULL,
   `id_schedule` int(11) DEFAULT NULL,
@@ -179,13 +223,13 @@ INSERT INTO `location_schedule` VALUES (1,1,'mon'),(1,1,'tue'),(1,4,'wed'),(1,1,
 UNLOCK TABLES;
 
 --
--- Temporary table structure for view `locations_view`
+-- Temporary view structure for view `locations_view`
 --
 
 DROP TABLE IF EXISTS `locations_view`;
 /*!50001 DROP VIEW IF EXISTS `locations_view`*/;
 SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `locations_view` AS SELECT 
  1 AS `name`,
  1 AS `address`,
@@ -199,7 +243,7 @@ SET character_set_client = @saved_cs_client;
 
 DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `menu` (
   `id_item` tinyint(4) NOT NULL AUTO_INCREMENT,
   `id_type` int(11) NOT NULL,
@@ -225,17 +269,35 @@ INSERT INTO `menu` VALUES (1,1,'Unagui','Rollo de alga, salmón y anguila.','htt
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `menu_view`
+--
+
+DROP TABLE IF EXISTS `menu_view`;
+/*!50001 DROP VIEW IF EXISTS `menu_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `menu_view` AS SELECT 
+ 1 AS `idItem`,
+ 1 AS `name`,
+ 1 AS `type`,
+ 1 AS `description`,
+ 1 AS `picture`,
+ 1 AS `quantity`,
+ 1 AS `price`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `purchase`
 --
 
 DROP TABLE IF EXISTS `purchase`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `purchase` (
-  `id_purchase` int(11) NOT NULL,
+  `id_purchase` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `id_location` int(11) NOT NULL,
-  `id_discount` int(11) NOT NULL,
+  `id_location` int(11) DEFAULT NULL,
+  `id_discount` int(11) DEFAULT NULL,
   `closed` tinyint(4) NOT NULL,
   `date` datetime NOT NULL,
   `taxes` varchar(45) NOT NULL,
@@ -251,7 +313,7 @@ CREATE TABLE `purchase` (
   CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
   CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`id_discount`) REFERENCES `discount` (`id_discount`),
   CONSTRAINT `purchase_ibfk_4` FOREIGN KEY (`id_billing_address`) REFERENCES `address` (`id_address`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,6 +322,7 @@ CREATE TABLE `purchase` (
 
 LOCK TABLES `purchase` WRITE;
 /*!40000 ALTER TABLE `purchase` DISABLE KEYS */;
+INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','68.8','430.00',0,NULL),(2,4,NULL,0,0,'2018-11-18 00:17:16','80','500.00',0,NULL);
 /*!40000 ALTER TABLE `purchase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +332,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `schedule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `schedule` (
   `id_schedule` int(11) NOT NULL AUTO_INCREMENT,
   `start` time DEFAULT NULL,
@@ -294,7 +357,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `type` (
   `id_type` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(7) NOT NULL,
@@ -318,7 +381,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `id_shipping_address` int(11) NOT NULL,
@@ -366,6 +429,24 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `cart_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `cart_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `cart_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`track` AS `delivered`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on(((`items`.`id_item` = `menu`.`id_item`) and (`items`.`price` = `menu`.`price`)))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on(((`menu`.`id_type` = `type`.`id_type`) and (`purchase`.`closed` = 0)))) group by `purchase`.`id_purchase` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `locations_view`
 --
 
@@ -382,6 +463,24 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `menu_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `menu_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `menu_view` AS select `menu`.`id_item` AS `idItem`,`menu`.`name` AS `name`,`type`.`name` AS `type`,`menu`.`description` AS `description`,`menu`.`picture` AS `picture`,1 AS `quantity`,`menu`.`price` AS `price` from (`menu` join `type` on((`menu`.`id_type` = `type`.`id_type`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -392,4 +491,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-03 17:00:21
+-- Dump completed on 2018-11-18  1:26:54
