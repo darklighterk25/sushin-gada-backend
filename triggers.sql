@@ -27,14 +27,38 @@ for each row
 
 begin
 
-    	declare aux_closed int;
+	declare done int default false;
 
-	select closed from purchase natural join items where id_item = new.id_item into aux_closed;
+	declare c_closed int;
+	declare c_purchase int;
 
-	if new.price != old.price and aux_closed = 0 then
+	declare c_cursor cursor for select closed, id_purchase from purchase;
+	declare continue handler for not found set done = true;
 
-		update items set price = new.price, subtotal = new.price*quantity where id_item = new.id_item;
+    	open c_cursor;
+
+    	if new.price != old.price then
+
+		read_loop: loop
+
+			fetch c_cursor into c_closed, c_purchase;
+
+            		if done then
+
+				leave read_loop;
+
+			end if;
+
+			if c_closed = 0 then
+
+				update items set price = new.price, subtotal = new.price*quantity where id_item = new.id_item and id_purchase = c_purchase;
+
+            		end if;
+
+		end loop;
 
 	end if;
+
+    close c_cursor;
 
 end
