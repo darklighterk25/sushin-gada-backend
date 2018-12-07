@@ -9,24 +9,4 @@ router.get('/', (req, res) => {
     });
 });
 
-router.put('/addToCart', (req, res) => {
-    if (req.session.id_user) {
-        database.query(`call add_to_cart(
-                            ${req.session.id_user},
-                            ${req.body['idItem']},
-                            ${req.body['quantity']},
-                            ${req.body['price']}
-                        )`, (err, result) => {
-            if (err) throw err;
-            res.status(200).json({
-                "status": 200
-            });
-        });
-    } else {
-        res.status(401).json({
-            "status": 401
-        });
-    }
-});
-
 module.exports = router;
