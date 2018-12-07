@@ -5,18 +5,36 @@ for each row
 
 begin
 
-  declare aux_purchase int;
+  call update_purchase(new.id_purchase);
 
-  declare aux_total varchar(45);
+end
 
-  declare aux_taxes varchar(45);
+// trigger que actualiza el total y taxes de una orden al cambiar el precio del menu
+create trigger update_order_total after update on items
 
-  set aux_purchase = new.id_purchase;
+for each row
 
-  select sum(subtotal) from items where id_purchase = aux_purchase into aux_total;
+begin
 
-  set aux_taxes = aux_total * 0.16;
+	call update_purchase(new.id_purchase);
 
-  update purchase set total = aux_total, taxes = aux_taxes where id_purchase = aux_purchase;
+end
+
+// trigger que actualiza los precios en el carrito cuando aun no se haga la compra
+create trigger update_prices before update on menu
+
+for each row
+
+begin
+
+    	declare aux_closed int;
+
+	select closed from purchase natural join items where id_item = new.id_item into aux_closed;
+
+	if new.price != old.price and aux_closed = 0 then
+
+		update items set price = new.price, subtotal = new.price*quantity where id_item = new.id_item;
+
+	end if;
 
 end

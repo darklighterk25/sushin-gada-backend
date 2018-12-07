@@ -129,7 +129,7 @@ CREATE TABLE `items` (
   KEY `id_item` (`id_item`),
   CONSTRAINT `items_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `menu` (`id_item`),
   CONSTRAINT `items_ibfk_3` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,1,2,2,200.00,100.00),(2,1,4,1,130.00,130.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00);
+INSERT INTO `items` VALUES (1,1,2,2,200.00,140.00),(2,1,4,1,140.00,140.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00),(6,2,1,1,120.00,120.00),(7,2,22,1,15.00,15.00),(8,1,2,1,140.00,140.00);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -151,13 +151,24 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `purchase_trigger` AFTER INSERT ON `items` FOR EACH ROW begin
-  declare aux_purchase int;
-  declare aux_total varchar(45);
-  declare aux_taxes varchar(45);
-  set aux_purchase = new.id_purchase;
-  select sum(subtotal) from items where id_purchase = aux_purchase into aux_total;
-  set aux_taxes = aux_total * 0.16;
-  update purchase set total = aux_total, taxes = aux_taxes where id_purchase = aux_purchase;
+  call update_purchase(new.id_purchase);
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_order_total` AFTER UPDATE ON `items` FOR EACH ROW begin
+	call update_purchase(new.id_purchase);
 end */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -264,9 +275,30 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,1,'Unagui','Rollo de alga, salmón y anguila.','https://imgur.com/oogRI5R.jpg',120.00,1),(2,1,'Maguro Avocado Uramaki','Uramaki de aguacate y atún.','https://imgur.com/2YS3ovm.jpg',100.00,1),(3,1,'Shake Maki','Maki de salmón.','https://imgur.com/0V2Afb0.jpg',100.00,1),(4,1,'California Uramaki','Uramaki de aguacate y cangrejo.','https://imgur.com/Wodtght.jpg',130.00,1),(5,1,'Mango Avocado Uramaki','Uramaki de mango y aguacate.','https://imgur.com/IAT5GKx.jpg',100.00,1),(6,1,'Sushi No Moriawase','Variedad de sushi (3 Nigirils + 4 Makis).','https://imgur.com/v08ll1w.jpg',180.00,1),(7,1,'Ebi Avocado Tobiko Uramaki','Langostino, aguacate, huevas de pez volador.','https://imgur.com/U6LRsWb.jpg',140.00,1),(8,1,'Ukai Uramaki','Rollo de queso fresco recubierto de salmón y aguacate.','https://imgur.com/jlRokYv.jpg',120.00,1),(9,1,'Oli Uramaki','Salmón, albahacacon, queso fresco, tomate seco y esparrago verde.','https://imgur.com/RFs3ZHV.jpg',150.00,1),(10,1,'Banana Roll','Rollo de plátano horneado con camarón tempura, topping maki y philadelphia.','https://imgur.com/LEN9Eih.jpg',95.00,1),(11,1,'Tres Quesos','Empanizado de queso manchego, queso amarillo y philadelphia.','https://imgur.com/KyfakjL.jpg',82.00,1),(12,1,'Mar y Tierra','Empanizado de res, camarón, aguacate y queso philadelphia por dentro.','https://imgur.com/IyLp5Te.jpg',75.00,1),(13,1,'Camarón Blue','Camarón, tocino, aguacate, philadelphia por dentro y queso manchego por fuera.','https://imgur.com/gOzerzO.jpg',82.00,1),(14,1,'Sushin\' Gada Roll','Cangrejo y philadelphia con topping maki bañado con salsa de anguila.','https://imgur.com/q5TIYlW.jpg',135.00,1),(15,1,'Beluman','Salmón por fuera, pasta maki, camarón y philadelphia por dentro.','https://imgur.com/xmiamfS.jpg',129.00,1),(16,2,'Té Negro','Producto hecho de la planta Camellia sinensis con un alto grado de oxidación.','https://imgur.com/7WDraUj.jpg',40.00,1),(17,2,'Té Verde','Producto hecho de la planta Camellia sinensis que no ha sufrido oxidación.','https://imgur.com/LZuz5Eg.jpg',40.00,1),(18,2,'Té Helado','Té helado de limón adornado con hojas de menta y rodajas de limón.','https://imgur.com/ZbVM4ZC.jpg',35.00,1),(19,3,'Sake','Bebida tradicional japonesa hecha de licor de arroz (300ml).','https://imgur.com/d5vuzo3.jpg',50.00,1),(20,3,'Syou-Chû','Bebida tradicional japonesa hecha de licor de trigo o patatas (300ml).','https://imgur.com/uqI7fAm.jpg',60.00,1),(21,3,'Amazake','Bebida tradicional japonesa hecha de licor de arroz dulce (300ml).','https://imgur.com/COj0ooy.jpg',80.00,1),(22,2,'Coca-Cola','Bebida carbonatada sabor cola (600ml).','https://imgur.com/OP78h7k.png',15.00,1),(23,2,'Fanta','Bebida carbonatada sabor naranja (600ml).','https://imgur.com/ltrxnOf.png',15.00,1),(24,2,'Sprite','Bebida carbonatada sabor lima-limón (600ml).','https://imgur.com/WPnYdCv.jpg',15.00,1);
+INSERT INTO `menu` VALUES (1,1,'Unagui','Rollo de alga, salmón y anguila.','https://imgur.com/oogRI5R.jpg',120.00,1),(2,1,'Maguro Avocado Uramaki','Uramaki de aguacate y atún.','https://imgur.com/2YS3ovm.jpg',140.00,1),(3,1,'Shake Maki','Maki de salmón.','https://imgur.com/0V2Afb0.jpg',100.00,1),(4,1,'California Uramaki','Uramaki de aguacate y cangrejo.','https://imgur.com/Wodtght.jpg',140.00,1),(5,1,'Mango Avocado Uramaki','Uramaki de mango y aguacate.','https://imgur.com/IAT5GKx.jpg',100.00,1),(6,1,'Sushi No Moriawase','Variedad de sushi (3 Nigirils + 4 Makis).','https://imgur.com/v08ll1w.jpg',180.00,1),(7,1,'Ebi Avocado Tobiko Uramaki','Langostino, aguacate, huevas de pez volador.','https://imgur.com/U6LRsWb.jpg',140.00,1),(8,1,'Ukai Uramaki','Rollo de queso fresco recubierto de salmón y aguacate.','https://imgur.com/jlRokYv.jpg',120.00,1),(9,1,'Oli Uramaki','Salmón, albahacacon, queso fresco, tomate seco y esparrago verde.','https://imgur.com/RFs3ZHV.jpg',150.00,1),(10,1,'Banana Roll','Rollo de plátano horneado con camarón tempura, topping maki y philadelphia.','https://imgur.com/LEN9Eih.jpg',95.00,1),(11,1,'Tres Quesos','Empanizado de queso manchego, queso amarillo y philadelphia.','https://imgur.com/KyfakjL.jpg',82.00,1),(12,1,'Mar y Tierra','Empanizado de res, camarón, aguacate y queso philadelphia por dentro.','https://imgur.com/IyLp5Te.jpg',75.00,1),(13,1,'Camarón Blue','Camarón, tocino, aguacate, philadelphia por dentro y queso manchego por fuera.','https://imgur.com/gOzerzO.jpg',82.00,1),(14,1,'Sushin\' Gada Roll','Cangrejo y philadelphia con topping maki bañado con salsa de anguila.','https://imgur.com/q5TIYlW.jpg',135.00,1),(15,1,'Beluman','Salmón por fuera, pasta maki, camarón y philadelphia por dentro.','https://imgur.com/xmiamfS.jpg',129.00,1),(16,2,'Té Negro','Producto hecho de la planta Camellia sinensis con un alto grado de oxidación.','https://imgur.com/7WDraUj.jpg',40.00,1),(17,2,'Té Verde','Producto hecho de la planta Camellia sinensis que no ha sufrido oxidación.','https://imgur.com/LZuz5Eg.jpg',40.00,1),(18,2,'Té Helado','Té helado de limón adornado con hojas de menta y rodajas de limón.','https://imgur.com/ZbVM4ZC.jpg',35.00,1),(19,3,'Sake','Bebida tradicional japonesa hecha de licor de arroz (300ml).','https://imgur.com/d5vuzo3.jpg',50.00,1),(20,3,'Syou-Chû','Bebida tradicional japonesa hecha de licor de trigo o patatas (300ml).','https://imgur.com/uqI7fAm.jpg',60.00,1),(21,3,'Amazake','Bebida tradicional japonesa hecha de licor de arroz dulce (300ml).','https://imgur.com/COj0ooy.jpg',80.00,1),(22,2,'Coca-Cola','Bebida carbonatada sabor cola (600ml).','https://imgur.com/OP78h7k.png',15.00,1),(23,2,'Fanta','Bebida carbonatada sabor naranja (600ml).','https://imgur.com/ltrxnOf.png',15.00,1),(24,2,'Sprite','Bebida carbonatada sabor lima-limón (600ml).','https://imgur.com/WPnYdCv.jpg',15.00,1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_prices` BEFORE UPDATE ON `menu` FOR EACH ROW begin
+	declare aux_closed int;
+    select closed from purchase natural join items where id_item = new.id_item into aux_closed;
+	if new.price != old.price and aux_closed = 0 then
+		update items set price = new.price, subtotal = new.price*quantity where id_item = new.id_item;
+	end if;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `menu_view`
@@ -322,7 +354,7 @@ CREATE TABLE `purchase` (
 
 LOCK TABLES `purchase` WRITE;
 /*!40000 ALTER TABLE `purchase` DISABLE KEYS */;
-INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','68.8','430.00',0,NULL),(2,4,NULL,0,0,'2018-11-18 00:17:16','80','500.00',0,NULL);
+INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','92.8','580.00',0,NULL),(2,4,NULL,0,0,'2018-11-18 00:17:16','101.60000000000001','635.00',0,NULL);
 /*!40000 ALTER TABLE `purchase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,4 +523,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-18  1:26:54
+-- Dump completed on 2018-12-06 18:15:47

@@ -58,3 +58,20 @@ begin
   insert into items values(id_items, aux_purchase, id_item, quantity, subtotal, price);
 
 end
+
+// Procedimiento para actualizar el total y taxes en las compras
+create procedure update_purchase(in purchase_key int)
+
+begin
+
+  declare aux_total varchar(45);
+
+  declare aux_taxes varchar(45);
+
+  select sum(subtotal) from items where id_purchase = purchase_key into aux_total;
+
+  set aux_taxes = aux_total * 0.16;
+
+  update purchase set total = aux_total, taxes = aux_taxes where id_purchase = purchase_key;
+
+end
