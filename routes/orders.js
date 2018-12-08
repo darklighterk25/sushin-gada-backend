@@ -47,4 +47,12 @@ router.get('/', (req, res) => {
     );
 });
 
+router.put('/purchase', (req, res) => {
+    res.status(200).json(
+        {
+            "status": 200
+        }
+    );
+});
+
 module.exports = router;

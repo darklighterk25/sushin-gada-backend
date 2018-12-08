@@ -78,6 +78,14 @@ router.get('/logged', (req, res) => {
     }
 });
 
+router.put('/set-billing-address', (req, res) => {
+    res.status(200).json(
+        {
+            "status": 200
+        }
+    );
+});
+
 router.put('/signup', (req, res) => {
     const hash = crypto.createHash('sha256').update(req.body['password']).digest('hex');
     database.query(`call sign_up(
