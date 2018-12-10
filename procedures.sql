@@ -1,4 +1,4 @@
-// Procedimiento para registrar un nuevo usuario
+-- Procedimiento para registrar un nuevo usuario
 create procedure sign_up(
   in
     street varchar(50),
@@ -22,7 +22,7 @@ begin
   insert into user values(id_user, addr, name, last_name1, last_name2, birthdate, gender, email, password, 1, 1);
 end
 
-// procedimiento para insertar nuevos items al carrito
+-- procedimiento para insertar nuevos items al carrito
 create procedure add_to_cart(
   
   in
@@ -59,7 +59,7 @@ begin
 
 end
 
-// Procedimiento para actualizar el total y taxes en las compras
+-- Procedimiento para actualizar el total y taxes en las compras
 create procedure update_purchase(in purchase_key int)
 
 begin

@@ -1,7 +1,8 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
-const simplify = require("simplify-commerce")
+const simplify = require("simplify-commerce");
+const shell = require("shelljs");
 
 router.get('/', (req, res) => {
     res.status(200).json(
@@ -55,7 +56,7 @@ router.put('/purchase', (req, res) => {
         card: {
             expMonth: `${req.body['card'].expMonth}`,
             expYear: `${req.body['card'].expYear}`,
-            cvc: `${req.body['card'].ccv}`,
+            cvc: `${req.body['card'].cvc}`,
             number: `${req.body['card'].number}`
         }
     }, (errData, data) => {
@@ -65,6 +66,8 @@ router.put('/purchase', (req, res) => {
                 "message": `${errData.data.error.message}`
             });
         } else {
+            var msg = `Ha realizado una compra en Sushin\' Gada por $ ${req.body['amount']/100} MXN`
+            shell.exec(`sudo ./send_sms.sh "${req.body['phone']}" "${msg}"`);
             res.status(200).json(data);
         }
     });

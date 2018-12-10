@@ -146,7 +146,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -163,7 +163,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -283,7 +283,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -470,7 +470,7 @@ UNLOCK TABLES;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `cart_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`track` AS `delivered`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on(((`items`.`id_item` = `menu`.`id_item`) and (`items`.`price` = `menu`.`price`)))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on(((`menu`.`id_type` = `type`.`id_type`) and (`purchase`.`closed` = 0)))) group by `purchase`.`id_purchase` */;
@@ -506,7 +506,7 @@ UNLOCK TABLES;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `menu_view` AS select `menu`.`id_item` AS `idItem`,`menu`.`name` AS `name`,`type`.`name` AS `type`,`menu`.`description` AS `description`,`menu`.`picture` AS `picture`,1 AS `quantity`,`menu`.`price` AS `price` from (`menu` join `type` on((`menu`.`id_type` = `type`.`id_type`))) */;
