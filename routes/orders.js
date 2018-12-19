@@ -19,6 +19,19 @@ router.get('/', (req, res) => {
     }
 });
 
+router.post('/promo-code', (req, res) => {
+    database.query(`select id_discount, percentage from discount where now() between start and end and code = "${req.body['code']}"`, (err, result) => {
+        if (err) throw err;
+        if (result.length === 0) {
+            res.status(403).json({
+                "status": 403
+            });
+        } else {
+            res.status(200).json(result[0]);
+        }
+    });
+});
+
 router.put('/purchase', (req, res) => {
     if (req.session.id_user) {
         var client = simplify.getClient({
