@@ -36,9 +36,18 @@ router.put('/add-item', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-    res.status(200).json({
-        "status": 200
-    });
+    if (req.session.id_user) {
+        database.query(`call delete_cart(${req.session.id_user})`, err => {
+            if (err) throw err;
+            res.status(200).json({
+                "status": 200
+            });
+        });
+    } else {
+        res.status(401).json({
+            "status": 401
+        });
+    }
 });
 
 module.exports = router;

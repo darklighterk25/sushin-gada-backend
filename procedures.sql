@@ -52,6 +52,19 @@ begin
   declare aux_total varchar(45);
   declare aux_taxes varchar(45);
   select sum(subtotal) from items where id_purchase = purchase_key into aux_total;
+  if aux_total is null then
+    set aux_total = 0;
+  end if;
   set aux_taxes = aux_total * 0.16;
   update purchase set total = aux_total, taxes = aux_taxes where id_purchase = purchase_key;
+end
+
+-- Procedimiento para eliminar todos los items del carrito
+create procedure delete_cart(user int)
+begin
+  declare aux_purchase int;
+  select id_purchase from purchase where closed = 0 and id_user = user into aux_purchase;
+  if aux_purchase is not null then
+    delete from items where id_purchase = aux_purchase;
+  end if;
 end
