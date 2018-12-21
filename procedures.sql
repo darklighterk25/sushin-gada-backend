@@ -35,7 +35,7 @@ begin
   set subtotal = new_quantity * unit_price;
   select id_purchase from purchase where closed = 0 and id_user = user into aux_purchase;
   if aux_purchase is null then
-    insert into purchase values(id_purchase, user, null, 0, 0, now(), 0, 0, 0, null);
+    insert into purchase values(id_purchase, user, null, 0, 0, now(), 0, 0, null);
     select id_purchase from purchase where closed = 0 and id_user = user into aux_purchase;
   end if;
   select id_items from items where id_purchase = aux_purchase and id_item = new_item into aux_items;
