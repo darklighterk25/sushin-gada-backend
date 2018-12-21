@@ -132,7 +132,7 @@ router.put('/signup', (req, res) => {
 router.put('/edit', (req, res) => {
     if (req.session.id_user) {
         const hash = crypto.createHash('sha256').update(req.body['password']).digest('hex');
-        database.query(`update table user set email = "${req.body['email']}", password = ${hash} where id_user = ${req.session.id_user}`, (err, result) => {
+        database.query(`update table user set email = "${req.body['email']}", password = "${hash}" where id_user = ${req.session.id_user}`, (err, result) => {
             if (err) throw err;
             res.status(200).json({
                 "status": 200
