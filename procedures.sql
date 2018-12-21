@@ -100,3 +100,14 @@ begin
   update purchase set closed = 1, id_discount = new_discount, date = now(), id_billing_address = aux_address, id_location = location where id_user = user and closed = 0;
   call update_purchase(purchase_key);
 end
+
+-- Procedimiento para cerrar una compra en sucursal
+create procedure purchase_in_branch(user_key int, new_discount int)
+begin
+  declare purchase_key int;
+  declare address_key int;
+  select id_shipping_address from user where id_user = user_key into address_key;
+  select id_purchase from purchase where id_user = user_key and closed = 0 into purchase_key;
+  update purchase set closed = 1, id_discount = new_discount, date = now(), id_billing_address = address_key, id_location = address_key where id_user = user_key and closed = 0;
+  call update_purchase(purchase_key);
+end

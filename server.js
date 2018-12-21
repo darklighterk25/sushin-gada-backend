@@ -17,6 +17,7 @@ const home = require('./routes/home');
 const locations = require('./routes/locations');
 const menu = require('./routes/menu');
 const orders = require('./routes/orders');
+const reports = require('./routes/reports');
 
 const app = express();
 
@@ -36,7 +37,8 @@ app.use('/account/cart', cart);
 app.use('/locations', locations);
 app.use('/menu', menu);
 app.use('/account/orders', orders);
+app.use('/reports', reports);
 
-app.listen( PORT, () => {
-    console.log(`Express Server (Port ${PORT}: \x1b[32m%s\x1b[0m)`, 'online' );
-} );
+app.listen(PORT, () => {
+    console.log(`Express Server (Port ${PORT}: \x1b[32m%s\x1b[0m)`, 'online');
+});

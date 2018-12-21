@@ -32,6 +32,17 @@ router.post('/promo-code', (req, res) => {
     });
 });
 
+router.put('/purchase-in-branch', (req, res) => {
+    if (req.session.id_user) {
+        database.query(`call purchase_in_branch(${req.session.id_user}, ${req.body['idDiscount']})`, (err) => {
+            if (err) throw err;
+            res.status(200).json({
+                "status": "200"
+            });
+        });
+    }
+});
+
 router.put('/purchase', (req, res) => {
     if (req.session.id_user) {
         var client = simplify.getClient({

@@ -109,7 +109,7 @@ CREATE TABLE `items` (
   KEY `id_item` (`id_item`),
   CONSTRAINT `items_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `menu` (`id_item`),
   CONSTRAINT `items_ibfk_3` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,1,2,2,200.00,140.00),(2,1,4,1,150.00,150.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00),(6,2,1,1,120.00,120.00),(7,2,22,1,15.00,15.00),(8,1,2,1,140.00,140.00),(9,3,3,4,400.00,100.00),(13,4,1,1,120.00,120.00),(14,4,7,2,280.00,140.00),(15,4,20,1,60.00,60.00),(16,5,12,1,75.00,75.00),(17,5,23,2,30.00,15.00),(18,5,17,1,40.00,40.00),(19,5,9,1,150.00,150.00),(20,6,1,1,120.00,120.00),(21,6,3,1,100.00,100.00),(22,6,6,1,180.00,180.00),(23,6,23,3,45.00,15.00),(29,7,3,2,200.00,100.00),(30,7,11,3,246.00,82.00),(31,7,21,1,80.00,80.00),(32,7,20,1,60.00,60.00),(33,7,19,1,50.00,50.00),(34,7,24,1,15.00,15.00),(35,8,1,1,120.00,120.00),(36,8,24,1,15.00,15.00),(37,8,19,1,50.00,50.00),(38,9,1,1,120.00,120.00),(39,9,7,1,140.00,140.00),(40,9,9,1,150.00,150.00),(41,9,22,1,15.00,15.00),(42,9,23,1,15.00,15.00),(43,9,21,1,80.00,80.00),(44,10,2,1,140.00,140.00),(45,10,3,1,100.00,100.00),(46,11,1,1,120.00,120.00),(47,12,4,1,178.00,178.00),(48,8,4,2,300.00,150.00);
+INSERT INTO `items` VALUES (1,1,2,2,200.00,140.00),(2,1,4,1,150.00,150.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00),(6,2,1,1,120.00,120.00),(7,2,22,1,15.00,15.00),(8,1,2,1,140.00,140.00),(9,3,3,4,400.00,100.00),(13,4,1,1,120.00,120.00),(14,4,7,2,280.00,140.00),(15,4,20,1,60.00,60.00),(16,5,12,1,75.00,75.00),(17,5,23,2,30.00,15.00),(18,5,17,1,40.00,40.00),(19,5,9,1,150.00,150.00),(20,6,1,1,120.00,120.00),(21,6,3,1,100.00,100.00),(22,6,6,1,180.00,180.00),(23,6,23,3,45.00,15.00),(29,7,3,2,200.00,100.00),(30,7,11,3,246.00,82.00),(31,7,21,1,80.00,80.00),(32,7,20,1,60.00,60.00),(33,7,19,1,50.00,50.00),(34,7,24,1,15.00,15.00),(35,8,1,1,120.00,120.00),(36,8,24,1,15.00,15.00),(37,8,19,1,50.00,50.00),(38,9,1,1,120.00,120.00),(39,9,7,1,140.00,140.00),(40,9,9,1,150.00,150.00),(41,9,22,1,15.00,15.00),(42,9,23,1,15.00,15.00),(43,9,21,1,80.00,80.00),(44,10,2,1,140.00,140.00),(45,10,3,1,100.00,100.00),(46,11,1,1,120.00,120.00),(47,12,4,1,178.00,178.00),(48,8,4,2,300.00,150.00),(49,13,4,4,600.00,150.00),(50,13,3,4,400.00,100.00),(51,13,2,2,280.00,140.00),(52,13,1,3,360.00,120.00),(53,13,21,1,80.00,80.00),(54,14,3,1,100.00,100.00),(55,14,4,1,150.00,150.00);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -340,7 +340,6 @@ SET character_set_client = utf8mb4;
  1 AS `id_user`,
  1 AS `id`,
  1 AS `closed`,
- 1 AS `delivered`,
  1 AS `date`,
  1 AS `discount`,
  1 AS `taxes`,
@@ -364,7 +363,6 @@ CREATE TABLE `purchase` (
   `date` datetime NOT NULL,
   `taxes` varchar(45) NOT NULL,
   `total` varchar(45) NOT NULL,
-  `track` tinyint(4) DEFAULT NULL,
   `id_billing_address` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_purchase`),
   KEY `id_user` (`id_user`),
@@ -375,7 +373,7 @@ CREATE TABLE `purchase` (
   CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
   CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`id_discount`) REFERENCES `discount` (`id_discount`),
   CONSTRAINT `purchase_ibfk_4` FOREIGN KEY (`id_billing_address`) REFERENCES `address` (`id_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +382,7 @@ CREATE TABLE `purchase` (
 
 LOCK TABLES `purchase` WRITE;
 /*!40000 ALTER TABLE `purchase` DISABLE KEYS */;
-INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','94.4000015258789','590',0,NULL),(2,4,NULL,0,1,'2018-11-18 00:17:16','101.60000000000001','635.00',0,1),(3,4,NULL,0,1,'2018-12-10 23:18:21','64','400.00',0,2),(4,4,2,0,1,'2018-12-20 18:04:41','73.5999984741211','460',0,2),(5,4,1,1,1,'2018-12-20 18:06:03','40.119998931884766','250.75',0,2),(6,4,1,1,1,'2018-12-20 18:07:21','60.52000045776367','378.25',0,2),(7,4,2,1,1,'2018-12-20 18:09:11','88.53599548339844','553.3499755859375',0,2),(8,4,NULL,0,0,'2018-12-20 18:09:36','77.5999984741211','485',0,NULL),(9,7,1,0,1,'2018-12-20 18:13:06','83.19999694824219','520',0,16),(10,7,2,0,1,'2018-12-20 18:14:47','38.400001525878906','240',0,16),(11,7,3,0,1,'2018-12-20 18:15:45','19.200000762939453','120',0,17),(12,7,2,0,1,'2018-12-20 18:31:18','28.479999542236328','178',0,17);
+INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','94.4000015258789','590',NULL),(2,4,NULL,0,1,'2018-11-18 00:17:16','101.60000000000001','635.00',1),(3,4,NULL,0,1,'2018-12-10 23:18:21','64','400.00',2),(4,4,2,0,1,'2018-12-20 18:04:41','73.5999984741211','460',2),(5,4,1,1,1,'2018-12-20 18:06:03','40.119998931884766','250.75',2),(6,4,1,1,1,'2018-12-20 18:07:21','60.52000045776367','378.25',2),(7,4,2,1,1,'2018-12-20 18:09:11','88.53599548339844','553.3499755859375',2),(8,4,NULL,0,0,'2018-12-20 18:09:36','77.5999984741211','485',NULL),(9,7,1,0,1,'2018-12-20 18:13:06','83.19999694824219','520',16),(10,7,2,0,1,'2018-12-20 18:14:47','38.400001525878906','240',16),(11,7,3,0,1,'2018-12-20 18:15:45','19.200000762939453','120',17),(12,7,2,0,1,'2018-12-20 18:31:18','28.479999542236328','178',17),(13,3,1,0,1,'2018-12-20 21:09:55','275.20001220703125','1720',1),(14,3,1,1,1,'2018-12-20 21:11:21','34','212.5',1);
 /*!40000 ALTER TABLE `purchase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +537,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `orders_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`track` AS `delivered`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on((`items`.`id_item` = `menu`.`id_item`))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on((`menu`.`id_type` = `type`.`id_type`))) group by `purchase`.`id_purchase` */;
+/*!50001 VIEW `orders_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on((`items`.`id_item` = `menu`.`id_item`))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on((`menu`.`id_type` = `type`.`id_type`))) group by `purchase`.`id_purchase` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -553,4 +551,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-20 18:44:51
+-- Dump completed on 2018-12-20 22:56:35
