@@ -52,11 +52,22 @@ router.put('/purchase', (req, res) => {
                 res.status(401).json(errData);
             } else {
                 var msg = `Ha realizado una compra en Sushin\' Gada por $ ${req.body['amount']/100} MXN`
-                shell.exec(`sudo ./send_sms.sh "${req.body['phone']}" "${msg}"`);
+                shell.exec(`sudo ./send_sms.sh "${req.body['address'].phone}" "${msg}"`);
                 if (data.paymentStatus === "DECLINED") {
                     res.status(401).json(data);
                 } else {
-                    database.query(`update purchase set closed = 1 where id_user = ${req.session.id_user}`, (err) => {
+                    const location = Math.round(Math.random() * 2 + 1);
+                    var query = "";
+                    if (req.body['address'].interiorNumber === undefined) {
+                        query = `call close_purchase(${req.session.id_user}, ${location}, ${req.body['idDiscount']}, "${req.body['address'].street}",
+                        "${req.body['address'].number}", null, "${req.body['address'].neighborhood}", "${req.body['address'].zipCode}",
+                        "${req.body['address'].phone}")`;
+                    } else {
+                        query = `call close_purchase(${req.session.id_user}, ${location}, ${req.body['idDiscount']}, "${req.body['address'].street}",
+                        "${req.body['address'].number}", "${req.body['address'].interiorNumber}", "${req.body['address'].neighborhood}", "${req.body['address'].zipCode}",
+                        "${req.body['address'].phone}")`;
+                    }
+                    database.query(query, (err) => {
                         if (err) throw err;
                         res.status(200).json(data);
                     });

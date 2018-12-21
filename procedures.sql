@@ -49,12 +49,15 @@ end
 -- Procedimiento para actualizar el total y taxes en las compras
 create procedure update_purchase(purchase_key int)
 begin
-  declare aux_total varchar(45);
-  declare aux_taxes varchar(45);
+  declare aux_percentage float;
+  declare aux_total float;
+  declare aux_taxes float;
+  select percentage from discount where id_discount = (select id_discount from purchase where id_purchase = purchase_key) into aux_percentage;
   select sum(subtotal) from items where id_purchase = purchase_key into aux_total;
   if aux_total is null then
     set aux_total = 0;
   end if;
+  set aux_total = aux_total - (aux_total * aux_percentage);
   set aux_taxes = aux_total * 0.16;
   update purchase set total = aux_total, taxes = aux_taxes where id_purchase = purchase_key;
 end
@@ -67,4 +70,33 @@ begin
   if aux_purchase is not null then
     delete from items where id_purchase = aux_purchase;
   end if;
+end
+
+-- Procedimiento para cerrar una compra
+create procedure close_purchase(
+  user int,
+  location int,
+  new_discount int,
+  new_street varchar(50),
+  new_number varchar(7),
+  new_interior_number varchar(5),
+  new_neighborhood varchar(50),
+  new_zip_code varchar(6),
+  new_phone varchar (10)
+)
+begin
+  declare aux_address int;
+  declare purchase_key int;
+  if new_interior_number is not null then
+    select id_address from address where street = new_street and number = new_number and  interior_number = new_interior_number and  neighborhood = new_neighborhood and zip_code = new_zip_code and  phone = new_phone into aux_address;
+  else 
+    select id_address from address where street = new_street and number = new_number and  interior_number is null and neighborhood = new_neighborhood and zip_code = new_zip_code and  phone = new_phone into aux_address;
+  end if;
+  if aux_address is null then
+    insert into address values (id_address, new_street, new_number, new_interior_number, new_neighborhood, new_zip_code, new_phone);
+    select last_insert_id() into aux_address;
+  end if;
+  select id_purchase from purchase where id_user = user and closed = 0 into purchase_key;
+  update purchase set closed = 1, id_discount = new_discount, date = now(), id_billing_address = aux_address, id_location = location where id_user = user and closed = 0;
+  call update_purchase(purchase_key);
 end

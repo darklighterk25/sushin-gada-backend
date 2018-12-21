@@ -50,7 +50,7 @@ CREATE TABLE `address` (
   `zip_code` char(6) DEFAULT NULL,
   `phone` char(10) DEFAULT NULL,
   PRIMARY KEY (`id_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'Avenida Luis Donaldo Colosio','119',NULL,'Jardines de la Concepción I','20120','4490000000'),(2,'Calle Pedro Parga','321',NULL,'Zona Centro','20000','4490000000'),(3,'Avenida Las Américas','1626',NULL,'Valle Dorado','20235','4490000000'),(4,'Luis Hidalgo Monroy','123',NULL,'Búlevares 1ra Secc','20288','4499999999'),(5,'Puerto Rico','113','A','Valle Dorado','20235','4499999999'),(6,'Prol. Libertad','128','C','Zona Centro','20000','4499999999'),(7,'San Francisco','221',NULL,'San Cayetano','20010','4499999999'),(8,'San Julián','239','B','San José del Arenal','20130','4499999999'),(9,'San Julián','239','D','San José del Arenal','20130','4499999999'),(10,'Licenciado Francisco Primo Verdad','639','B','Barrio de la Purísima','20259','4499999999'),(11,'Licenciado Francisco Primo Verdad','713',NULL,'Barrio de la Purísima','20259','4499999999'),(12,'Av. José Ma. Chávez','445',NULL,'Obraje','20230','4499999999'),(13,'Crepúsculo','218',NULL,'Vista del Sol I','20266','4499999999'),(14,'Av. Héroe de Nacozari','2414','D','Jardines del Parque','20276','4499999999');
+INSERT INTO `address` VALUES (1,'Avenida Luis Donaldo Colosio','119',NULL,'Jardines de la Concepción I','20120','4490000000'),(2,'Calle Pedro Parga','321',NULL,'Zona Centro','20000','4490000000'),(3,'Avenida Las Américas','1626',NULL,'Valle Dorado','20235','4490000000'),(4,'Luis Hidalgo Monroy','123',NULL,'Búlevares 1ra Secc','20288','4499999999'),(5,'Puerto Rico','113','A','Valle Dorado','20235','4499999999'),(6,'Prol. Libertad','128','C','Zona Centro','20000','4499999999'),(7,'San Francisco','221',NULL,'San Cayetano','20010','4499999999'),(8,'San Julián','239','B','San José del Arenal','20130','4499999999'),(9,'San Julián','239','D','San José del Arenal','20130','4499999999'),(10,'Licenciado Francisco Primo Verdad','639','B','Barrio de la Purísima','20259','4499999999'),(11,'Licenciado Francisco Primo Verdad','713',NULL,'Barrio de la Purísima','20259','4499999999'),(12,'Av. José Ma. Chávez','445',NULL,'Obraje','20230','4499999999'),(13,'Crepúsculo','218',NULL,'Vista del Sol I','20266','4499999999'),(14,'Av. Héroe de Nacozari','2414','D','Jardines del Parque','20276','4499999999'),(16,'Luis Hidalgo Monroy','121',NULL,'Búlevares Primera Sección','20288','4492621398'),(17,'Luis Hidalgo Monroy','121','A','Búlevares Primera Sección','20288','4492621398');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `items` (
   KEY `id_item` (`id_item`),
   CONSTRAINT `items_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `menu` (`id_item`),
   CONSTRAINT `items_ibfk_3` FOREIGN KEY (`id_purchase`) REFERENCES `purchase` (`id_purchase`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,1,2,2,200.00,140.00),(2,1,4,1,140.00,140.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00),(6,2,1,1,120.00,120.00),(7,2,22,1,15.00,15.00),(8,1,2,1,140.00,140.00),(9,3,3,4,400.00,100.00);
+INSERT INTO `items` VALUES (1,1,2,2,200.00,140.00),(2,1,4,1,150.00,150.00),(3,1,3,1,100.00,100.00),(4,2,1,1,120.00,120.00),(5,2,10,4,380.00,95.00),(6,2,1,1,120.00,120.00),(7,2,22,1,15.00,15.00),(8,1,2,1,140.00,140.00),(9,3,3,4,400.00,100.00),(13,4,1,1,120.00,120.00),(14,4,7,2,280.00,140.00),(15,4,20,1,60.00,60.00),(16,5,12,1,75.00,75.00),(17,5,23,2,30.00,15.00),(18,5,17,1,40.00,40.00),(19,5,9,1,150.00,150.00),(20,6,1,1,120.00,120.00),(21,6,3,1,100.00,100.00),(22,6,6,1,180.00,180.00),(23,6,23,3,45.00,15.00),(29,7,3,2,200.00,100.00),(30,7,11,3,246.00,82.00),(31,7,21,1,80.00,80.00),(32,7,20,1,60.00,60.00),(33,7,19,1,50.00,50.00),(34,7,24,1,15.00,15.00),(35,8,1,1,120.00,120.00),(36,8,24,1,15.00,15.00),(37,8,19,1,50.00,50.00),(38,9,1,1,120.00,120.00),(39,9,7,1,140.00,140.00),(40,9,9,1,150.00,150.00),(41,9,22,1,15.00,15.00),(42,9,23,1,15.00,15.00),(43,9,21,1,80.00,80.00),(44,10,2,1,140.00,140.00),(45,10,3,1,100.00,100.00),(46,11,1,1,120.00,120.00),(47,12,4,1,178.00,178.00),(48,8,4,2,300.00,150.00);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -272,7 +272,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,1,'Unagui','Rollo de alga, salmón y anguila.','https://imgur.com/oogRI5R.jpg',120.00,1),(2,1,'Maguro Avocado Uramaki','Uramaki de aguacate y atún.','https://imgur.com/2YS3ovm.jpg',140.00,1),(3,1,'Shake Maki','Maki de salmón.','https://imgur.com/0V2Afb0.jpg',100.00,1),(4,1,'California Uramaki','Uramaki de aguacate y cangrejo.','https://imgur.com/Wodtght.jpg',140.00,1),(5,1,'Mango Avocado Uramaki','Uramaki de mango y aguacate.','https://imgur.com/IAT5GKx.jpg',100.00,1),(6,1,'Sushi No Moriawase','Variedad de sushi (3 Nigirils + 4 Makis).','https://imgur.com/v08ll1w.jpg',180.00,1),(7,1,'Ebi Avocado Tobiko Uramaki','Langostino, aguacate, huevas de pez volador.','https://imgur.com/U6LRsWb.jpg',140.00,1),(8,1,'Ukai Uramaki','Rollo de queso fresco recubierto de salmón y aguacate.','https://imgur.com/jlRokYv.jpg',120.00,1),(9,1,'Oli Uramaki','Salmón, albahacacon, queso fresco, tomate seco y esparrago verde.','https://imgur.com/RFs3ZHV.jpg',150.00,1),(10,1,'Banana Roll','Rollo de plátano horneado con camarón tempura, topping maki y philadelphia.','https://imgur.com/LEN9Eih.jpg',95.00,1),(11,1,'Tres Quesos','Empanizado de queso manchego, queso amarillo y philadelphia.','https://imgur.com/KyfakjL.jpg',82.00,1),(12,1,'Mar y Tierra','Empanizado de res, camarón, aguacate y queso philadelphia por dentro.','https://imgur.com/IyLp5Te.jpg',75.00,1),(13,1,'Camarón Blue','Camarón, tocino, aguacate, philadelphia por dentro y queso manchego por fuera.','https://imgur.com/gOzerzO.jpg',82.00,1),(14,1,'Sushin\' Gada Roll','Cangrejo y philadelphia con topping maki bañado con salsa de anguila.','https://imgur.com/q5TIYlW.jpg',135.00,1),(15,1,'Beluman','Salmón por fuera, pasta maki, camarón y philadelphia por dentro.','https://imgur.com/xmiamfS.jpg',129.00,1),(16,2,'Té Negro','Producto hecho de la planta Camellia sinensis con un alto grado de oxidación.','https://imgur.com/7WDraUj.jpg',40.00,1),(17,2,'Té Verde','Producto hecho de la planta Camellia sinensis que no ha sufrido oxidación.','https://imgur.com/LZuz5Eg.jpg',40.00,1),(18,2,'Té Helado','Té helado de limón adornado con hojas de menta y rodajas de limón.','https://imgur.com/ZbVM4ZC.jpg',35.00,1),(19,3,'Sake','Bebida tradicional japonesa hecha de licor de arroz (300ml).','https://imgur.com/d5vuzo3.jpg',50.00,1),(20,3,'Syou-Chû','Bebida tradicional japonesa hecha de licor de trigo o patatas (300ml).','https://imgur.com/uqI7fAm.jpg',60.00,1),(21,3,'Amazake','Bebida tradicional japonesa hecha de licor de arroz dulce (300ml).','https://imgur.com/COj0ooy.jpg',80.00,1),(22,2,'Coca-Cola','Bebida carbonatada sabor cola (600ml).','https://imgur.com/OP78h7k.png',15.00,1),(23,2,'Fanta','Bebida carbonatada sabor naranja (600ml).','https://imgur.com/ltrxnOf.png',15.00,1),(24,2,'Sprite','Bebida carbonatada sabor lima-limón (600ml).','https://imgur.com/WPnYdCv.jpg',15.00,1);
+INSERT INTO `menu` VALUES (1,1,'Unagui','Rollo de alga, salmón y anguila.','https://imgur.com/oogRI5R.jpg',120.00,1),(2,1,'Maguro Avocado Uramaki','Uramaki de aguacate y atún.','https://imgur.com/2YS3ovm.jpg',140.00,1),(3,1,'Shake Maki','Maki de salmón.','https://imgur.com/0V2Afb0.jpg',100.00,1),(4,1,'California Uramaki','Uramaki de aguacate y cangrejo.','https://imgur.com/Wodtght.jpg',150.00,1),(5,1,'Mango Avocado Uramaki','Uramaki de mango y aguacate.','https://imgur.com/IAT5GKx.jpg',100.00,1),(6,1,'Sushi No Moriawase','Variedad de sushi (3 Nigirils + 4 Makis).','https://imgur.com/v08ll1w.jpg',180.00,1),(7,1,'Ebi Avocado Tobiko Uramaki','Langostino, aguacate, huevas de pez volador.','https://imgur.com/U6LRsWb.jpg',140.00,1),(8,1,'Ukai Uramaki','Rollo de queso fresco recubierto de salmón y aguacate.','https://imgur.com/jlRokYv.jpg',120.00,1),(9,1,'Oli Uramaki','Salmón, albahacacon, queso fresco, tomate seco y esparrago verde.','https://imgur.com/RFs3ZHV.jpg',150.00,1),(10,1,'Banana Roll','Rollo de plátano horneado con camarón tempura, topping maki y philadelphia.','https://imgur.com/LEN9Eih.jpg',95.00,1),(11,1,'Tres Quesos','Empanizado de queso manchego, queso amarillo y philadelphia.','https://imgur.com/KyfakjL.jpg',82.00,1),(12,1,'Mar y Tierra','Empanizado de res, camarón, aguacate y queso philadelphia por dentro.','https://imgur.com/IyLp5Te.jpg',75.00,1),(13,1,'Camarón Blue','Camarón, tocino, aguacate, philadelphia por dentro y queso manchego por fuera.','https://imgur.com/gOzerzO.jpg',82.00,1),(14,1,'Sushin\' Gada Roll','Cangrejo y philadelphia con topping maki bañado con salsa de anguila.','https://imgur.com/q5TIYlW.jpg',135.00,1),(15,1,'Beluman','Salmón por fuera, pasta maki, camarón y philadelphia por dentro.','https://imgur.com/xmiamfS.jpg',129.00,1),(16,2,'Té Negro','Producto hecho de la planta Camellia sinensis con un alto grado de oxidación.','https://imgur.com/7WDraUj.jpg',40.00,1),(17,2,'Té Verde','Producto hecho de la planta Camellia sinensis que no ha sufrido oxidación.','https://imgur.com/LZuz5Eg.jpg',40.00,1),(18,2,'Té Helado','Té helado de limón adornado con hojas de menta y rodajas de limón.','https://imgur.com/ZbVM4ZC.jpg',35.00,1),(19,3,'Sake','Bebida tradicional japonesa hecha de licor de arroz (300ml).','https://imgur.com/d5vuzo3.jpg',50.00,1),(20,3,'Syou-Chû','Bebida tradicional japonesa hecha de licor de trigo o patatas (300ml).','https://imgur.com/uqI7fAm.jpg',60.00,1),(21,3,'Amazake','Bebida tradicional japonesa hecha de licor de arroz dulce (300ml).','https://imgur.com/COj0ooy.jpg',80.00,1),(22,2,'Coca-Cola','Bebida carbonatada sabor cola (600ml).','https://imgur.com/OP78h7k.png',15.00,1),(23,2,'Fanta','Bebida carbonatada sabor naranja (600ml).','https://imgur.com/ltrxnOf.png',15.00,1),(24,2,'Sprite','Bebida carbonatada sabor lima-limón (600ml).','https://imgur.com/WPnYdCv.jpg',15.00,1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -375,7 +375,7 @@ CREATE TABLE `purchase` (
   CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
   CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`id_discount`) REFERENCES `discount` (`id_discount`),
   CONSTRAINT `purchase_ibfk_4` FOREIGN KEY (`id_billing_address`) REFERENCES `address` (`id_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +384,7 @@ CREATE TABLE `purchase` (
 
 LOCK TABLES `purchase` WRITE;
 /*!40000 ALTER TABLE `purchase` DISABLE KEYS */;
-INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','92.8','580.00',0,NULL),(2,4,NULL,0,1,'2018-11-18 00:17:16','101.60000000000001','635.00',0,NULL),(3,4,NULL,0,1,'2018-12-10 23:18:21','64','400.00',0,NULL);
+INSERT INTO `purchase` VALUES (1,1,NULL,0,0,'2018-11-18 00:16:36','94.4000015258789','590',0,NULL),(2,4,NULL,0,1,'2018-11-18 00:17:16','101.60000000000001','635.00',0,1),(3,4,NULL,0,1,'2018-12-10 23:18:21','64','400.00',0,2),(4,4,2,0,1,'2018-12-20 18:04:41','73.5999984741211','460',0,2),(5,4,1,1,1,'2018-12-20 18:06:03','40.119998931884766','250.75',0,2),(6,4,1,1,1,'2018-12-20 18:07:21','60.52000045776367','378.25',0,2),(7,4,2,1,1,'2018-12-20 18:09:11','88.53599548339844','553.3499755859375',0,2),(8,4,NULL,0,0,'2018-12-20 18:09:36','77.5999984741211','485',0,NULL),(9,7,1,0,1,'2018-12-20 18:13:06','83.19999694824219','520',0,16),(10,7,2,0,1,'2018-12-20 18:14:47','38.400001525878906','240',0,16),(11,7,3,0,1,'2018-12-20 18:15:45','19.200000762939453','120',0,17),(12,7,2,0,1,'2018-12-20 18:31:18','28.479999542236328','178',0,17);
 /*!40000 ALTER TABLE `purchase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +539,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `orders_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`track` AS `delivered`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on(((`items`.`id_item` = `menu`.`id_item`) and (`items`.`price` = `menu`.`price`)))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on((`menu`.`id_type` = `type`.`id_type`))) group by `purchase`.`id_purchase` */;
+/*!50001 VIEW `orders_view` AS select `purchase`.`id_user` AS `id_user`,`purchase`.`id_purchase` AS `id`,`purchase`.`closed` AS `closed`,`purchase`.`track` AS `delivered`,`purchase`.`date` AS `date`,`discount`.`percentage` AS `discount`,`purchase`.`taxes` AS `taxes`,`purchase`.`total` AS `total`,json_arrayagg(json_object('name',`menu`.`name`,'type',`type`.`name`,'description',`menu`.`description`,'picture',`menu`.`picture`,'quantity',`items`.`quantity`,'price',`items`.`price`)) AS `items` from ((((`purchase` join `items` on((`purchase`.`id_purchase` = `items`.`id_purchase`))) join `menu` on((`items`.`id_item` = `menu`.`id_item`))) join `discount` on((`purchase`.`id_discount` = `discount`.`id_discount`))) join `type` on((`menu`.`id_type` = `type`.`id_type`))) group by `purchase`.`id_purchase` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -553,4 +553,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-10 23:20:58
+-- Dump completed on 2018-12-20 18:44:51
