@@ -82,7 +82,7 @@ router.get('/product-sales', (req, res) => {
 
 router.get('/sales-by-type', (req, res) => {
     if (req.session.id_user) {
-        database.query('select type.name, count(type.name) from purchase join items join menu join type on purchase.id_purchase = items.id_purchase and items.id_item = menu.id_item and menu.id_type = type.id_type where closed = 1 group by (type.name)', (err, result) => {
+        database.query('select type.name, count(type.name) as quantity from purchase join items join menu join type on purchase.id_purchase = items.id_purchase and items.id_item = menu.id_item and menu.id_type = type.id_type where closed = 1 group by (type.name)', (err, result) => {
             if (err) throw err;
             res.status(200).json(result);
         });
