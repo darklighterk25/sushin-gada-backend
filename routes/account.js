@@ -130,27 +130,19 @@ router.put('/signup', (req, res) => {
 });
 
 router.put('/edit', (req, res) => {
-    const hash = crypto.createHash('sha256').update(req.body['password']).digest('hex');
-    database.query(`update table user set(
-                        "${ req.body['address'].street }",
-                        "${ req.body['address'].number }",
-                        "${ req.body['address'].interiorNumber }",
-                        "${ req.body['address'].neighborhood }",
-                        "${ req.body['address'].zipCode }",
-                        "${ req.body['address'].phone }",
-                        "${ req.body['name'] }",
-                        "${ req.body['lastName1'] }",
-                        "${ req.body['lastName2'] }",
-                        "${ req.body['birthDate'] }",
-                        ${ req.body['gender'] },
-                        "${ req.body['email'] }",
-                        "${ hash }"
-                    )`, (err, result) => {
-        if (err) throw err;
-        res.status(200).json({
-            "status": 200
+    if (req.session.id_user) {
+        const hash = crypto.createHash('sha256').update(req.body['password']).digest('hex');
+        database.query(`update table user set email = "${req.body['email']}", password = ${hash} where id_user = ${req.session.id_user}`, (err, result) => {
+            if (err) throw err;
+            res.status(200).json({
+                "status": 200
+            });
         });
-    });
+    } else {
+        res.status(401).json({
+            "status": 401
+        });
+    }
 });
 
 module.exports = router;
